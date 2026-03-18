@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MyTripLog.Models.Destination>
+
+@{
+    ViewData["Title"] = "Manage Destinations";
+}
+
+<h2>Manage Destinations</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<form asp-action="Add" method="post" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="name" class="form-control" placeholder="New Destination" required />
+        <button class="btn btn-dark" type="submit">Add</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th style="width:120px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var destination in Model)
+        {
+            <tr>
+                <td>@destination.Name</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@destination.DestinationId" />
+                        <button class="btn btn-primary">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

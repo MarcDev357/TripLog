@@ -1,0 +1,57 @@
+﻿@model MyTripLog.ViewModels.AddTripViewModel
+
+@{
+    ViewData["Title"] = "Add Trip";
+}
+
+<div class="container mt-4">
+
+    <div class="bg-secondary text-white text-center p-3 mb-4">
+        <h2 class="mb-0">My Trip Log</h2>
+    </div>
+
+    <h3>Add Trip Destination and Dates</h3>
+
+    <form asp-action="Add" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Destination</label>
+            <select asp-for="DestinationId"
+                    asp-items="Model.Destinations"
+                    class="form-select"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Accommodation</label>
+            <select asp-for="AccommodationId"
+                    asp-items="Model.Accommodations"
+                    class="form-select"></select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Start Date</label>
+            <input asp-for="StartDate" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">End Date</label>
+            <input asp-for="EndDate" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Things To Do</label>
+            <div class="form-text">Hold down the CTRL key to select multiple activities</div>
+
+            <select asp-for="SelectedActivityIds"
+                    asp-items="Model.Activities"
+                    multiple
+                    size="8"
+                    class="form-select"></select>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+    </form>
+
+</div>

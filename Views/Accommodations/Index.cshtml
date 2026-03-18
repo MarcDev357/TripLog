@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<MyTripLog.Models.Accommodation>
+
+@{
+    ViewData["Title"] = "Manage Accommodations";
+}
+
+<h2>Manage Accommodations</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<form asp-action="Add" method="post" class="mb-3">
+    <div class="row g-2">
+        <div class="col-md-4">
+            <input type="text" name="name" class="form-control" placeholder="Accommodation Name" required />
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="phone" class="form-control" placeholder="Phone (optional)" />
+        </div>
+        <div class="col-md-3">
+            <input type="email" name="email" class="form-control" placeholder="Email (optional)" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-dark w-100" type="submit">Add</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th style="width:120px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var accommodation in Model)
+        {
+            <tr>
+                <td>@accommodation.Name</td>
+                <td>@accommodation.Phone</td>
+                <td>@accommodation.Email</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@accommodation.AccommodationId" />
+                        <button class="btn btn-primary">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
